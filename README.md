@@ -1,0 +1,2 @@
+# PokemonManager
+PokemonManager Angular
