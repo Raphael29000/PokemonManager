@@ -1,5 +1,5 @@
 export class Pokemon {
-id:string;
+id:number;
 nom:string;
 categorie:string;
 poid:number;
@@ -8,7 +8,7 @@ type: string[];
 picture: string;
 
 constructor(
-    id:string,
+    id:number,
     nom:string,
     description:string,
     poid:number,

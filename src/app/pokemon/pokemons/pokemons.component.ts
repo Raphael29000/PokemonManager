@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormSearch } from 'src/app/modelForm/form-search';
+import { PokemonService } from 'src/app/pokemon/service/pokemon.service';
 import { Pokemon } from '../pokemon';
+
 
 @Component({
   selector: 'app-pokemons',
@@ -8,18 +11,29 @@ import { Pokemon } from '../pokemon';
 })
 export class PokemonsComponent implements OnInit {
 
+  pokemonSelectionne?:Pokemon;
+
+  numberPokemonPokedex?:number;
   
-  bulbizarre = new Pokemon("001","Bulbizarre","graine",6.9,0.7,["plante","poison"],"../assets/file/1.png");
-  herbizarre = new Pokemon("002","Herbizarre","graine",13,1,["plante","poison"],"../assets/file/2.png");
-  florizarre = new Pokemon("003","Florizarre","graine",100,2,["plante","poison"],"../assets/file/3.png");
-  salamèche = new Pokemon("004","Salamèche","graine",8.5,0.6,["plante","poison"],"../assets/file/4.png");
-  reptincel = new Pokemon("005","Reptincel","graine",19,1.1,["plante","poison"],"../assets/file/5.png");
-  dracaufeu = new Pokemon("006","Dracaufeu","graine",90.5,1.7,["plante","poison"],"../assets/file/6.png");
-  pokemons = [this.bulbizarre,this.herbizarre,this.florizarre,this.salamèche,this.reptincel,this.dracaufeu]
+  pokemons: Pokemon[] = [];
 
-  constructor() { }
+  FormSearch = new FormSearch(''); 
 
-  ngOnInit(): void {
+  constructor(private pokemonService: PokemonService) {
+      
+   }
+
+  ngOnInit(){
+    this.pokemons = this.pokemonService.getAllPokemon();
+    this.numberPokemonPokedex = this.pokemonService.getNumberPokemonInPokedex();
+  }
+
+  rechercher(nom:string){
+    this.pokemons = this.pokemonService.getPokemonByName(nom);
+  }
+
+  annulerRecherche(){
+    this.pokemons = this.pokemonService.getAllPokemon();
   }
 
 }
